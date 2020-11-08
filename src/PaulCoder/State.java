@@ -1,5 +1,5 @@
 package PaulCoder;
 
 enum State {
-    EMPTY, HIT, MISS, SUNk
+    EMPTY, SHIP, HIT, MISS, SUNK
 }

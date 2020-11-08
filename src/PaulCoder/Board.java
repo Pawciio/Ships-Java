@@ -4,6 +4,7 @@ public class Board {
     public static final int BOARD_SIZE = 10;
 
     private Field[][] fields = new Field[BOARD_SIZE][BOARD_SIZE];
+    private int shipsCount;
 
     public Board(){
         for (int y = 0; y < BOARD_SIZE; y++) {
@@ -57,4 +58,19 @@ public class Board {
         }
     }
 
+    public void addShip(int x, int y, Submarine submarine) throws IllegalMoveException{
+        if (x < 0 || x > BOARD_SIZE || y < 0 || y > BOARD_SIZE){
+            throw new IllegalMoveException("Ship set outside board");
+        }
+        submarine.setOnField(fields[y][x], 0);
+        shipsCount++;
+    }
+
+    public int getShipsCount() {
+        return shipsCount;
+    }
+
+    public Field getField(int x, int y) {
+        return fields[y][x];
+    }
 }
