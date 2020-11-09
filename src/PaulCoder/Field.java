@@ -21,12 +21,19 @@ public class Field {
     public char stateToChar() {
         char value;
         switch (state) {
+            case SHIP:
             case EMPTY:
                 value = ' ';
                 break;
 
             case HIT:
                 value = 'O';
+                break;
+            case SUNK:
+                value = 'X';
+                break;
+            case MISS:
+                value = '!';
                 break;
             default:
                 value = '?';

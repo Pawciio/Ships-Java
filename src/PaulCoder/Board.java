@@ -90,7 +90,7 @@ public class Board {
     public void printBoard() {
         printLetters();
         for (int i = 0; i < 10; i++) {
-            int numberToPrint = i + 1;
+            int numberToPrint = i;
             if (numberToPrint < 10) {
                 System.out.print(' ');
             }
@@ -175,6 +175,10 @@ public class Board {
     }
 
     public void shoot(int x, int y) throws IllegalMoveException {
+        if (isOutside(x, y)){
+            throw new IllegalMoveException("Don't shoot outside");
+        }
+
         Field field = getField(x, y);
 
         if (field.getState() == State.MISS ||
