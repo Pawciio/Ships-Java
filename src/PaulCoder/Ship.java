@@ -10,4 +10,6 @@ public interface Ship {
 
     void setOnField (Field field, int decNum);
 
+    WarShip.Orientation getOrientation();
+
 }

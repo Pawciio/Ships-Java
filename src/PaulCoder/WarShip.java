@@ -1,14 +1,17 @@
 package PaulCoder;
 
 public abstract class WarShip implements Ship {
+
     enum Orientation {
         HORIZONTAL, VERTICAL
     }
+
     private Orientation orientation;
     private int hits;
     private Field[] occupied;
 
-    public WarShip(){
+    public WarShip(Orientation orientation) {
+        this.orientation = orientation;
         occupied = new Field[getDecksCount()];
     }
 
@@ -17,31 +20,49 @@ public abstract class WarShip implements Ship {
         return hits == getDecksCount();
     }
 
-    public void setOnField (Field field, int decNum){
+    public void setOnField(Field field, int deckNo) {
+
         field.setShip(this);
         field.setState(State.SHIP);
-        occupied[decNum] = field;
+        occupied[deckNo] = field;
     }
 
     @Override
     public void hit() {
         hits++;
-        for (int i = 0; i < occupied.length; i++) {
-            occupied[i].setState(State.SUNK);
+        if(isSunk()) {
+            for (int i = 0; i < occupied.length; i++) {
+                occupied[i].setState(State.SUNK);
+            }
         }
+    }
+
+    public Orientation getOrientation() {
+        return orientation;
     }
 }
 
-class Submarine extends WarShip{
+class Submarine extends WarShip {
+
+    public Submarine(Orientation orientation) {
+        super(orientation);
+    }
+
+    public Submarine() {
+        this(Orientation.HORIZONTAL);
+    }
 
     @Override
     public int getDecksCount() {
         return 1;
     }
-
 }
 
-class Destoyer extends WarShip{
+class Destoyer extends WarShip {
+
+    public Destoyer(Orientation orientation) {
+        super(orientation);
+    }
 
     @Override
     public int getDecksCount() {
@@ -51,6 +72,10 @@ class Destoyer extends WarShip{
 
 class Cruiser extends WarShip {
 
+    public Cruiser(Orientation orientation) {
+        super(orientation);
+    }
+
     @Override
     public int getDecksCount() {
         return 3;
@@ -58,6 +83,10 @@ class Cruiser extends WarShip {
 }
 
 class BattleShip extends WarShip {
+
+    public BattleShip(Orientation orientation) {
+        super(orientation);
+    }
 
     @Override
     public int getDecksCount() {
